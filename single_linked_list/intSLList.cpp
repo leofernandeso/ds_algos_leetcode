@@ -22,11 +22,20 @@ void IntSLList::addToTail(int data) {
     }
 }
 
-void IntSLList::printElements() {
+void IntSLList::printElementsIterative() {
     IntNode *p_it = head;
     while (p_it != NULL) {
         std::cout << p_it->data << "\n";
         p_it = p_it->next;
+    }
+}
+
+void IntSLList::printElementsRecursive(IntNode *head) {
+    if (head == NULL)
+        return;
+    else {
+        std::cout << head->data << "\n";
+        printElementsRecursive(head->next);
     }
 }
 
@@ -62,6 +71,42 @@ int IntSLList::deleteFromTail() {
     return data;
 }
 
+void IntSLList::reverseIterative() {
+    IntNode *current = head;
+    IntNode *prev = NULL;
+    IntNode *next = NULL;
+
+    while (current != NULL) {
+
+        // saving the next node.
+        next = current->next;
+
+        // reversing link.
+        current->next = prev;
+
+        // moving prev and current pointers.
+        prev = current;
+        current = next;
+    }
+
+    IntNode *aux = head;
+    head = tail;
+    tail = aux;
+
+}
+
+void IntSLList::reverseRecursive(IntNode *p) {
+    if (p->next == NULL) {
+        tail = head;
+        head = p;
+        return;
+    }
+    reverseRecursive(p->next);
+    IntNode *q = p->next;
+    q->next = p;
+    p->next = NULL;
+}
+
 void IntSLList::deleteNode(int data) {
     IntNode *p = head;
     
@@ -88,20 +133,40 @@ bool IntSLList::contains(int data) const {
 }
 
 int main() {
-    IntSLList *ll = new IntSLList();
-    ll->addToHead(2);
-    ll->addToHead(4);
-    ll->addToTail(10);
-    ll->addToTail(11);
-    ll->addToHead(3);
-    ll->printElements();
+    // IntSLList *ll = new IntSLList();
+
+    // ll->addToHead(2);
+    // ll->addToHead(4);
+    // ll->addToTail(10);
+    // ll->addToTail(11);
+    // ll->addToHead(3);
+    // ll->printElements();
+    // std::cout << "\n";
+    // ll->deleteFromHead();
+    // std::cout << "\n";
+    // ll->printElements();
+    // std::cout << "\n";
+    // ll->deleteFromTail();
+    // ll->deleteNode(4);
+    // ll->printElements();
+    // std::cout << ll->contains(10) << " " << ll->contains(4);
+
+    IntSLList *ll2 = new IntSLList();
+    ll2->addToHead(2);
+    ll2->addToHead(4);
+    ll2->addToTail(10);
+    ll2->addToTail(11);
+    ll2->addToHead(3);
+    ll2->printElementsRecursive(ll2->head);
+    ll2->addToHead(15);
+    ll2->addToTail(1100);
     std::cout << "\n";
-    ll->deleteFromHead();
+    ll2->reverseRecursive(ll2->head);
+    ll2->printElementsIterative();
+    ll2->deleteFromTail();
     std::cout << "\n";
-    ll->printElements();
+    ll2->printElementsIterative();
+    ll2->deleteFromHead();
     std::cout << "\n";
-    ll->deleteFromTail();
-    ll->deleteNode(4);
-    ll->printElements();
-    std::cout << ll->contains(10) << " " << ll->contains(4);
+    ll2->printElementsIterative();
 }

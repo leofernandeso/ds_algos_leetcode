@@ -15,6 +15,7 @@ class IntNode {
 
 class IntSLList {
     public:
+        IntNode *head, *tail;
         IntSLList() {
             head = tail = NULL;
         }
@@ -26,11 +27,12 @@ class IntSLList {
         void addToTail(int);
         int deleteFromHead();
         int deleteFromTail();
+        void reverseIterative();
+        void reverseRecursive(IntNode*);
         void deleteNode(int);
         bool contains(int) const;
-        void printElements();
-    private:
-        IntNode *head, *tail;
+        void printElementsIterative();
+        void printElementsRecursive(IntNode*);
 };
 
 #endif
