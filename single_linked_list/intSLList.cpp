@@ -169,4 +169,5 @@ int main() {
     ll2->deleteFromHead();
     std::cout << "\n";
     ll2->printElementsIterative();
+    delete ll2;
 }

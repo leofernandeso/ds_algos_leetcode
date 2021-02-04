@@ -19,7 +19,14 @@ class IntSLList {
         IntSLList() {
             head = tail = NULL;
         }
-        ~IntSLList();
+        ~IntSLList() {
+            IntNode *p;
+            while (head != NULL) {
+                p = head;
+                head = head->next;
+                delete p;
+            }
+        }
         int isEmpty() {
             return head == NULL;
         }
