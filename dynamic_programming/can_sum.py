@@ -31,7 +31,7 @@ def memoized_can_sum(target, numbers):
             if can_sum(remainder):
                 memo[remainder] = True
                 return True
-                
+
         memo[remainder] = False
         return False
 
